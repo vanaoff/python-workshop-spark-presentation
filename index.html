@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>PySpark - Very brief introduction </title>
+
+    <meta name="description" content="PySpark">
+    <meta name="author" content="Ivan Héda">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link'  );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script> 
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+    <style>
+      .slides section div {
+        background-color: rgba(0, 0, 0, 0.8) !important; 
+        color: #fff; 
+        padding: 20px; 
+      }
+
+      blockquote {
+        background-color: rgba(0, 0, 0, 0.6) !important;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="reveal"> 
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides" id="intro">
+        <section data-background="img/supercomp.jpg">
+          <div>
+          <h1>PySpark</h1>
+          <h3>Big data in Python</h3>
+          <h6>Very brief introduction</h6 >
+          <h5>2016/01/14</h5>
+          <p>
+            <small>
+            By <a href="mailto:ivan.heda@jumpshot.com">Ivan Héda</a> / 
+            <a href="https://twitter.com/IvanHda">@ivanhda</a>
+            </small>
+          </p>
+          <p>
+            <small>
+            <a href="https://www.jumpshot.com">Jumpshot, Inc.</a>
+            </small>
+          </p>
+          </div>
+
+          <aside class="notes" data-markdown>
+            
+          </aside>
+        </section>
+
+        <section data-background="img/oldcomp.jpg" id="problem">
+          <div>
+            <h2>Problem</h2>
+            <p> All presented frameworks are great, but ...</p> 
+            <p class="fragment"> they are limited by performance of our machines. </p>
+            <p class="fragment" style="font-size: 150% "> We need to handle ~TBs datasets. </p>
+          </div>
+          
+          <aside class="notes" data-markdown>
+            - Frameworks covers workflow
+              - Lot of things is single threaded
+              - Parallelization needs non-trivial work
+                - ipyparallel, multiprocessing, ...
+              - There exists frameworks to parallelize on cluster
+            - Datasets larger than memory
+              - Often on multiple machines
+          </aside>
+        </section>
+
+        <section data-background="img/spark.jpg" id="spark-fast" data-transition="none" data-background-transition="none">
+          <div>
+            <h2>Apache Spark</h2>
+            <blockquote cite="https://spark.apache.com"> 
+            &ldquo;Apache Spark™ is a fast and general engine for large-scale data processing.&rdquo;
+            </blockquote>
+            
+            <h3 class="fragment">&ldquo;Fast&rdquo;</h3>
+            <ul>
+              <li class="fragment"> Holds world record in 100TB dataset sorting. </li>
+              <li class="fragment"> Able to cache datasets into memory. </li>
+              <li style="visibility: hidden;"></li>
+              <li style="visibility: hidden;"><br><br><br></li>
+            </ul>
+            
+            <aside class="notes" data-markdown>
+             
+          </aside>
+        </section>
+
+        <section data-background="img/spark.jpg" id="spark-general" data-transition="none" data-background-transition="none">
+          <div>
+            <h2>Apache Spark</h2>
+            <blockquote cite="https://spark.apache.com"> 
+            &ldquo;Apache Spark™ is a fast and general engine for large-scale data processing.&rdquo;
+            </blockquote>
+            
+            <h3>&ldquo;General&rdquo;</h3>
+            <ul>
+              <li class="fragment"> Contains a lot of high-level data-processing functions. </li>
+              <li class="fragment"> Built-in libs: SQL, Streaming, MLlib, GraphX </li>
+              <li class="fragment"> API in <span style="color:green;">Scala </span>, Java, <span style="color:red;">Python</span> and R. </li>
+              <li class="fragment"> Works with HDFS, HBase, Hive, Postgres, etc.  </li>
+              <li class="fragment"> Runs locally, over Hadoop(YARN), Mesos or in standalone mode. </li>
+            </ul>
+
+          </div>
+        </section>
+
+        <section data-background="img/architecture.jpg" id="pyspark">
+          <div>
+            <h2>PySpark</h2>
+            <p>PySpark is Python wrapper around Spark.</p> 
+            <h4 class="fragment ">Architecture</h4>
+            <p class="fragment">
+              <a href="https://cwiki.apache.org/confluence/display/SPARK/PySpark+Internals">
+                <img width="50%" height="50%" data-src="img/pyspark.png" alt="PySpark architecture">            
+              </a>
+            </p>
+          </div> 
+        </section>
+
+        <section data-background="img/performance.jpg" id="performance">
+          <div>
+            <h2>Performance?</h2>
+            <blockquote class="fragment" cite="http://radar.oreilly.com/2015/02/recent-performance-improvements-in-apache-spark.html" style="font-size: 50%">
+              &ldquo;Spark’s core developers have worked extensively to bridge the performance gap between JVM languages and Python.
+              In particular, PySpark can now run on PyPy to leverage the just-in-time compiler. (Up to 50x speedup)
+              The way Python processes communicate with the main Spark JVM programs have also been redesigned to enable worker reuse.&rdquo;
+            </blockquote>
+
+            <p class="fragment"> 
+              Comparable with native Spark... <br>
+              <a href="https://databricks.com/blog/2015/04/24/recent-performance-improvements-in-apache-spark-sql-python-dataframes-and-more.html"> 
+              <img width="50%" height="30%" data-src="img/pyspark_perf.png" alt="PySpark architecture">            
+              </a>
+            </p>
+          </div>
+        </section>
+
+          <section data-background="img/rambo.jpg">
+          <div>
+            <p style="font-size: 200%"> Enough said...</p>
+            <p style="font-size: 200%"> let's give it a try.</p>
+          </div>
+        </section>
+      
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/notes/notes.js', async: true }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>
